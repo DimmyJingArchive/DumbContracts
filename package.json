@@ -1,0 +1,48 @@
+{
+  "name": "song-source",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
+  },
+  "dependencies": {
+    "framer-motion": "latest",
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "tailwindcss": "latest",
+    "web-vitals": "latest"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.19.3",
+    "@fortawesome/fontawesome-svg-core": "^6.2.0",
+    "@fortawesome/free-solid-svg-icons": "^6.2.0",
+    "@fortawesome/react-fontawesome": "^0.2.0",
+    "@storybook/addon-actions": "latest",
+    "@storybook/addon-essentials": "latest",
+    "@storybook/addon-interactions": "latest",
+    "@storybook/addon-links": "latest",
+    "@storybook/addon-postcss": "latest",
+    "@storybook/builder-webpack5": "latest",
+    "@storybook/manager-webpack5": "latest",
+    "@storybook/react": "latest",
+    "@storybook/testing-library": "latest",
+    "@testing-library/react": "latest",
+    "@types/react": "latest",
+    "autoprefixer": "latest",
+    "babel-loader": "latest",
+    "eslint": "latest",
+    "highlight.js": "^11.6.0",
+    "highlightjs-solidity": "^2.0.5",
+    "postcss": "latest",
+    "react-highlight": "^0.14.0",
+    "recharts": "^2.1.15",
+    "require-from-string": "latest",
+    "typescript": "latest",
+    "webpack": "latest"
+  }
+}
