@@ -7,9 +7,10 @@ export default function Contract() {
   const router = useRouter();
   const { address } = router.query;
   const [contractInfo, setContractInfo] =
-    useState<(ContractCardData & { source_code: string }) | undefined>(
-      undefined
-    );
+    useState<
+      | (ContractCardData & { source_code: string; all_transactions: any })
+      | undefined
+    >(undefined);
   useEffect(() => {
     if (contractInfo === undefined) {
       for (let i = 0; i < all_data.result.length; i++) {
@@ -32,19 +33,12 @@ export default function Contract() {
                 ? getTags(all_risk_map[all_data.result[i][0]])
                 : undefined,
             source_code: all_data.result[i][1].contractData.SourceCode,
+            all_transactions: all_data.result[i][1].transactions,
           });
       }
     }
   }, [address]);
-  if (contractInfo === undefined)
-    /*
-    return (
-      <div className="text-5xl text-slate-200 m-40">
-        Address {address} cannot be found.
-      </div>
-    );
-    */
-    return <></>;
+  if (contractInfo === undefined) return <></>;
   return (
     <ContractInstance
       name={contractInfo.name}
@@ -55,6 +49,7 @@ export default function Contract() {
       transactions={contractInfo.transactions}
       tags={contractInfo.tags}
       source_code={contractInfo.source_code}
+      all_transactions={contractInfo.all_transactions}
       onBack={() => router.push("/")}
     />
   );

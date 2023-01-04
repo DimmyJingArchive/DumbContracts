@@ -3,7 +3,6 @@ import json
 import requests
 from flask import Flask, request
 from flask_cors import CORS, cross_origin
-from numpy import False_
 from sentence_transformers import SentenceTransformer, util
 
 name_set = set()

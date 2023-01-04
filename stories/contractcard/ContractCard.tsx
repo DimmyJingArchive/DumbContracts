@@ -46,9 +46,13 @@ export const ContractCard = ({
               </motion.span>
             ))}
           {tags !== undefined && tags.length === 0 && (
-            <span className="text-xs font-semibold inline-block py-1 px-2 rounded-full text-green-600 bg-green-200 uppercase last:mr-0 mr-1 h-min">
+            <motion.span
+              className="text-xs font-semibold inline-block py-1 px-2 rounded-full text-green-600 bg-green-200 uppercase last:mr-0 mr-1 h-min"
+              initial={{ opacity: 0, translateY: 20 }}
+              animate={{ opacity: 1, translateY: 0 }}
+            >
               no threats detected
-            </span>
+            </motion.span>
           )}
         </div>
       </div>

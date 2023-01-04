@@ -114,7 +114,12 @@ export default function Home() {
         />
       </div>
       {contractData.map((el) => (
-        <div className="my-4" key={el.name}>
+        <motion.div
+          className="my-4"
+          key={el.name}
+          initial={{ opacity: 0, translateY: 20 }}
+          animate={{ opacity: 1, translateY: 0 }}
+        >
           <ContractCard
             name={el.name}
             address={el.address}
@@ -135,7 +140,7 @@ export default function Home() {
             }
             onClick={(address: string) => router.push(address)}
           />
-        </div>
+        </motion.div>
       ))}
     </motion.div>
   );
