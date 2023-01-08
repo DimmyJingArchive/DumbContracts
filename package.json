@@ -10,10 +10,13 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.7",
+    "@heroicons/react": "^2.0.13",
     "framer-motion": "latest",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",
+    "react-markdown": "^8.0.4",
     "tailwindcss": "latest",
     "web-vitals": "latest"
   },

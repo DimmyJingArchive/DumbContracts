@@ -3,9 +3,19 @@ import json
 import requests
 from flask import Flask, request
 from flask_cors import CORS, cross_origin
+from revChatGPT.ChatGPT import Chatbot
 from sentence_transformers import SentenceTransformer, util
 
 name_set = set()
+
+with open("settings.json") as f:
+    chatbot_login = json.load(f)
+
+chatbot = Chatbot(
+    chatbot_login,
+    conversation_id=None,
+    parent_id=None,
+)
 
 
 def valid_contract(contract_info):
@@ -116,6 +126,19 @@ def get_risk(addr):
         risk["address"] = addr
         risk_cache[addr] = risk
     return risk_cache[addr]
+
+
+@app.route("/analyze", methods=["POST"])
+@cross_origin(**cross_origin_args)
+def analyze():
+    data = (
+        "For the following solidity program, can you first tell me the reasons why the contract is vulnerable, and then tell me on a scale from 1 to 10, how safe it is to use?\n\n"
+        + json.loads(request.data)["source_code"]
+    )
+    response = chatbot.ask(data, conversation_id=None, parent_id=None)
+    if response is None:
+        return {"message": "error occured while accessing gpt-3"}
+    return {"message": response["message"]}
 
 
 app.run(debug=False, threaded=True, host="0.0.0.0", port=5010)

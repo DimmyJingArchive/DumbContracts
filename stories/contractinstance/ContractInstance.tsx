@@ -26,6 +26,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import ReactMarkdown from "react-markdown";
 
 type ContractInstanceProps = ContractCardData & {
   source_code: string;
@@ -72,6 +73,23 @@ export const ContractInstance = ({
   const [volume, setVolume] = useState(-1);
   const [method, setMethod] = useState("");
   const [saved, setSaved] = useState(false);
+  const [result, setResult] = useState("");
+
+  function handle_analyze() {
+    setResult("loading...");
+    fetch("http://localhost:5010/analyze", {
+      method: "POST",
+      body: JSON.stringify({ source_code: source_code }),
+    })
+      .then((data) => data.json())
+      .then((data) => {
+        setResult(data.message);
+      })
+      .catch((err) => {
+        setResult("An error occurred while requesting result from GPT-3");
+      });
+  }
+
   if (epochData.length === 0) {
     let resEpochs = [];
     for (let i = 0; i < all_transactions.length; i++)
@@ -308,14 +326,29 @@ export const ContractInstance = ({
               </div>
             </div>
           </div>
-          <div className="pt-4 mb-20">
+          <div className="pt-4 mb-4">
             <h1 className="text-center text-5xl font-bold mb-4 text-slate-400">
               Source Code
             </h1>
             <div className="max-h-screen overflow-auto border border-slate-700">
               <Highlight language="solidity">{source_code}</Highlight>
             </div>
+            <div className="flex flex-row justify-end">
+              <button
+                className="rounded p-1 text-slate-300 bg-green-600 px-8 mt-4 text-lg"
+                onClick={handle_analyze}
+              >
+                Analyze
+              </button>
+            </div>
           </div>
+          {result && (
+            <div className="pt-4 pb-20">
+              <ReactMarkdown className="font-light text-slate-400 text-lg whitespace-pre-wrap">
+                {result}
+              </ReactMarkdown>
+            </div>
+          )}
         </motion.div>
       </div>
     </>
